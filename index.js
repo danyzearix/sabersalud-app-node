@@ -1,57 +1,49 @@
 const express = require('express');
-const mongoose = require("mongoose")
-const config = require("./config/config")
 const cors = require('cors');
+const mongoose = require("mongoose");
+const config = require("./config/config");
 
-const verificarToken = require('./middleware/authMiddleware');
+// Crear la aplicación Express
+const app = express();
 
 // Cargar las variables de entorno desde el archivo .env
 require('dotenv').config();
 
-const app = express();
+// Middleware para parsear JSON
+app.use(express.json());
 
-const port = process.env.PORT || 3000;
-console.log(`runing on port number ${port}`)
-
-// Permitir solicitudes desde cualquier origen
-app.use(cors());
-// O permitir solicitudes solo desde el origen específico donde se encuentra tu aplicación React
+// Configuración de CORS para permitir solicitudes desde orígenes específicos
 app.use(cors({
   origin: ['http://localhost:5173', 'https://app.sabersalud.co/']
 }));
 
-// Importamos los routers
+// Importar los routers
 const estudiantesRouter = require('./routes/estudiantes');
-const usuariosRouter = require("./routes/usuarios.js")
-// Middleware para parsear JSON
-app.use(express.json());
+const usuariosRouter = require("./routes/usuarios.js");
 
-
-
-
-
-// Rutas protegidas
+// Rutas de la aplicación
 app.use('/api', estudiantesRouter);
 app.use('/api/auth', usuariosRouter);
 
 // Ruta para el home
 app.get('/', (req, res) => {
-  res.send('API de estudiantes');
+  res.send('Bienvenido a la API de estudiantes');
 });
 
 // Conexión a la base de datos
-mongoose.connect(config.db.uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-mongoose.connection.on('open', () => {
+mongoose.connect(config.db.uri)
+  .then(() => {
     console.log('Conexión a la base de datos establecida');
+    // Iniciar el servidor solo después de conectar la base de datos
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log(`Servidor ejecutándose en el puerto ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Error al conectar a la base de datos:', error);
   });
-  
-  mongoose.connection.on('error', (error) => {
-    console.log('Error al conectar a la base de datos:', error);
-  });
+
   
 
  
