@@ -13,9 +13,12 @@ require('dotenv').config();
 app.use(express.json());
 
 // Configuración de CORS para permitir solicitudes desde orígenes específicos
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://app.sabersalud.co/']
-}));
+const corsOptions = {
+  origin: ['http://localhost:5173', 'https://app.sabersalud.co'],
+  optionsSuccessStatus: 200 // Algunos navegadores antiguos (IE11, varios SmartTVs) requieren esto
+};
+
+app.use(cors(corsOptions));
 
 // Importar los routers
 const estudiantesRouter = require('./routes/estudiantes');
