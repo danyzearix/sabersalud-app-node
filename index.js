@@ -17,7 +17,6 @@ app.use(cors({
   origin: '*'
 }));
 
-app.use(bodyParser.json());
 
 // Importamos los routers
 const estudiantesRouter = require('./routes/estudiantes');
