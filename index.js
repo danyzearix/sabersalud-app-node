@@ -13,10 +13,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 console.log(`runing on port number ${port}`)
 
+// Permitir solicitudes desde cualquier origen
+app.use(cors());
+// O permitir solicitudes solo desde el origen específico donde se encuentra tu aplicación React
 app.use(cors({
-  origin: '*'
+  origin: ['http://localhost:5173', 'https://app.sabersalud.co/']
 }));
-
 
 // Importamos los routers
 const estudiantesRouter = require('./routes/estudiantes');
