@@ -17,7 +17,9 @@ app.use(express.json());
 
 const cors = require('cors');
 // Middleware de CORS para permitir peticiones de cualquier origen
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173' // Solo permite solicitudes de este origen
+}));
 
 
 // Rutas protegidas
