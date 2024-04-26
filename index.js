@@ -47,3 +47,4 @@ mongoose.connection.on('open', () => {
   
 
   const port = process.env.PORT || 3000;
+  console.log(`runing on port number ${port}`)
