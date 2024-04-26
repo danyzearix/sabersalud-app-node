@@ -10,9 +10,14 @@ require('dotenv').config();
 
 const app = express();
 
+const port = process.env.PORT || 3000;
+console.log(`runing on port number ${port}`)
+
 app.use(cors({
   origin: '*'
 }));
+
+app.use(bodyParser.json());
 
 // Importamos los routers
 const estudiantesRouter = require('./routes/estudiantes');
@@ -48,5 +53,4 @@ mongoose.connection.on('open', () => {
   });
   
 
-  const port = process.env.PORT || 3000;
-  console.log(`runing on port number ${port}`)
+ 
