@@ -9,6 +9,7 @@ const verificarToken = require('./middleware/authMiddleware');
 require('dotenv').config();
 
 const app = express();
+const cors = require('cors');
 
 // Importamos los routers
 const estudiantesRouter = require('./routes/estudiantes');
@@ -17,7 +18,7 @@ const usuariosRouter = require("./routes/usuarios.js")
 app.use(express.json());
 
 
-const cors = require('cors');
+
 
 
 // Rutas protegidas
