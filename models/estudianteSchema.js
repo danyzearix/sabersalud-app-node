@@ -16,12 +16,14 @@ const estudianteSchema = new mongoose.Schema({
     enum: ['Ninguno', 'basica_primaria', 'bachiller', 'tecnico', 'tecnologo', 'profesional', 'especialista', 'maestria', 'doctorado']
   },
   profesion: { type: String },
-  celular: { type: String }, // Asumiendo que el celular es una cadena para permitir prefijos.
+  celular: { type: String },
+  celularAdicional: { type: String }, // Nuevo campo para número de contacto adicional
+  comoTeGustariaQueTeLlamen: { type: String }, // Nuevo campo para cómo le gusta que le llamen
   ciudadResidencia: { type: String, required: true },
   tipoIdentificacion: { 
     type: String, 
     required: true, 
-    enum: ['T.I', 'C.C.', 'C.E.', 'P.A.']
+    enum: ['T.I', 'C.C.', 'C.E.', 'P.A.', 'PPT'] // Se ha añadido PPT como opción
   },
   numeroId: { 
     type: String, 
@@ -33,12 +35,10 @@ const estudianteSchema = new mongoose.Schema({
     vencimiento: { type: Date }, // Fecha de vencimiento individual por curso.
     fechaFactura: { type: Date }, // Fecha de la factura del curso.
     valor: { type: Number } // Valor del curso.
-  }],
-  fechaNacimiento: { type: Date, required: true }
+  }]
 });
 
 const Estudiante = mongoose.model('Estudiante', estudianteSchema);
-
 
 module.exports = Estudiante;
 
