@@ -9,7 +9,7 @@ const estudianteSchema = new mongoose.Schema({
     unique: true, 
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Correo electrónico no válido']
   },
-  edad: { type: Number, min: 18, max: 100, required: true },
+  edad: { type: Number, min: 15, max: 100, required: true },
   gradoEscolaridad: {
     type: String,
     required: true,
@@ -20,15 +20,17 @@ const estudianteSchema = new mongoose.Schema({
   celularAdicional: { type: String }, // Nuevo campo para número de contacto adicional
   comoTeGustariaQueTeLlamen: { type: String }, // Nuevo campo para cómo le gusta que le llamen
   ciudadResidencia: { type: String, required: true },
+  direccion: { type: String, required: true },
   tipoIdentificacion: { 
     type: String, 
     required: true, 
-    enum: ['T.I', 'C.C.', 'C.E.', 'P.A.', 'PPT'] // Se ha añadido PPT como opción
+    enum: ['T.I', 'C.C.', 'C.E.', 'P.A.', 'P.P.T'] // Se ha añadido PPT como opción
   },
   numeroId: { 
     type: String, 
     required: true,
-    min: 5 
+    min: 5,
+    match: /^[^.,\s]*$/ // Expresión regular que excluye puntos, comas y espacios 
   },
   cursos: [{
     nombreCurso: { type: String },
