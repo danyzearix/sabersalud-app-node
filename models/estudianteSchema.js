@@ -24,7 +24,7 @@ const estudianteSchema = new mongoose.Schema({
   tipoIdentificacion: { 
     type: String, 
     required: true, 
-    enum: ['T.I', 'C.C.', 'C.E.', 'P.A.', 'P.P.T'] // Se ha añadido PPT como opción
+    enum: ['T.I', 'C.C', 'C.E', 'P.A', 'P.P.T'] // Se ha añadido PPT como opción
   },
   numeroId: { 
     type: String, 
