@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Configuración de CORS para permitir solicitudes desde orígenes específicos
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://app.sabersalud.co'],
+  origin: ['http://localhost:5173', 'https://app.sabersalud.co', 'https://app.federacionsalud.com'],
   optionsSuccessStatus: 200 // Algunos navegadores antiguos (IE11, varios SmartTVs) requieren esto
 };
 
